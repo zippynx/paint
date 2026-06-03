@@ -1,60 +1,73 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Paint App</title>
-    <link rel="stylesheet" href="paint.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="app-container">
-        <header class="toolbar">
-            <div class="tool-group">
-                <label for="color-picker" class="tool-label">Warna</label>
-                <div class="color-picker-wrapper">
-                    <input type="color" id="color-picker" value="#0f172a" />
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paint</title>
+    <link rel="stylesheet" href="paint.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="toolbar">
+
+        <div class="tool-group">
+          <div class="swatch-wrap" title="Pick color">
+            <div class="color-preview" id="color-preview"></div>
+            <div class="color-swatch">
+              <input type="color" id="color-picker" value="#1a1a1a" />
             </div>
+          </div>
+          <div class="preset-colors" id="presets"></div>
+        </div>
 
-            <div class="divider"></div>
+        <div class="tool-group">
+          <button class="tool-btn active" id="btn-brush" title="Brush (B)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c1.25 0 2-.75 2-2v-1"/><path d="M3 11h4"/><path d="M15 5l-3 7"/><path d="M18.5 14.5c-1.5 1.26-2 5-2 5h5s-.5-3.74-2-5a1.77 1.77 0 0 0-1 0z"/></svg>
+            Brush
+          </button>
+          <button class="tool-btn" id="btn-eraser" title="Eraser (E)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+            Eraser
+          </button>
+        </div>
 
-            <div class="tool-group">
-                <label for="brush-size" class="tool-label">Ukuran Kuas: <span id="size-val">5</span>px</label>
-                <input type="range" id="brush-size" min="1" max="50" value="5" />
-            </div>
+        <div class="tool-group">
+          <span class="tool-label">Size</span>
+          <input type="range" id="brush-size" min="1" max="60" value="6" step="1" />
+          <span class="size-val" id="size-val">6</span>
+        </div>
 
-            <div class="divider"></div>
+        <div class="tool-group">
+          <span class="tool-label">Opacity</span>
+          <input type="range" id="opacity" min="5" max="100" value="100" step="1" />
+          <span class="size-val" id="opacity-val">100%</span>
+        </div>
 
-            <div class="actions">
-                <button id="clear-button" class="btn btn-icon" title="Bersihkan Kanvas">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                    </svg>
-                </button>
-                <button id="fill-button" class="btn btn-icon" title="Isi Latar Belakang">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
-                    </svg>
-                </button>
-                <button id="download-button" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Download
-                </button>
-            </div>
-        </header>
+        <div class="tool-group tool-group--right">
+          <button class="tool-btn" id="btn-fill" title="Fill canvas">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m19 11-8-8-8.5 8.5a5.5 5.5 0 0 0 7.78 7.78L19 11z"/><path d="m3.5 11.5 6 6"/><path d="M20.97 13c.03.33.03.66 0 1a4 4 0 0 1-8 0c0-1.33 1.33-2.67 4-4 2.67 1.33 4 2.67 4 4z"/></svg>
+            Fill
+          </button>
+          <button class="tool-btn" id="btn-undo" title="Undo (Ctrl+Z)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+          </button>
+          <button class="tool-btn" id="btn-clear" title="Clear canvas">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          </button>
+          <button class="tool-btn" id="btn-download" title="Download PNG">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Save
+          </button>
+        </div>
 
-        <main class="canvas-container">
-            <canvas id="board" width="800" height="500"></canvas>
-        </main>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="board"></canvas>
+        <span class="mode-indicator" id="mode-indicator"></span>
+      </div>
     </div>
+
     <script src="paint.js"></script>
-</body>
+  </body>
 </html>
